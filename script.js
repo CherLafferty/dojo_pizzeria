@@ -29,17 +29,51 @@ console.log(pizza3);
 var pizza4 = pizzaOven("regular crust", "marinara", "mozzerella", ["pepperoni", "pineapple"]);
 console.log(pizza4);
 
+var crustType = [
+    "deep dish",
+    "hand tossed",
+    "thin crust",
+];
+var sauceType = [
+    "marinara",
+    "alfredo",
+    "traditional"
+];
+var cheeses = [
+    "mozzerella",
+    "parmesan",
+    "asagio",
+    "feta"
+];
+var toppings = [
+    "pepperonie",
+    "sausage",
+    "veggies",
+    "pineapple",
+    "mushroom"
+];
 
-    var pizzaIngredients = {
-    crustType: ["deep dish", "thin crust", "original crust", "hand tossed"],
-    sauceType: ["marinara", "alfredo"],
-    cheeses:   ["mozzerella", "parmesan", "asagio"],
-    toppings: ["pepperoni", "sausage", "mushrooms", "onions", "green peppers"]
-    }
-    function randomPizza(crustType, sauceType, cheeses, toppings) {
-        var pizzaIngredients = {}
-        pizzaIngredients.crustType = crustType[Math.floor(Math.random() * crustType.length)];
+function randomRange(max, min) {
+    return Math.floor(Math.random() * max - min) + min;
+}
+function randomPick(arr) {
+    var i = Math.floor(arr.length * Math.random());
+    return arr[i];
+}
+    function randomPizza(){
+        var pizza = {};
+        pizza.crustType = randomPick(crustType);
+        pizza.sauceType = randomPick(sauceType);
+        pizza.cheeses = [];
+        pizza.toppings = [];
+        
+        for(var i=0; i<randomRange(4, 1); i++) {
+            pizza.cheeses.push(randomPick(cheeses));
+        }
+        for(var i=0; i<randomRange(5, 0); i++) {
+            pizza.toppings.push(randomPick(toppings));
+        }
+        return pizza;
+}
+console.log(randomPizza());
 
-        return pizzaIngredients;
-    }
-    console.log(pizzaIngredients);
